@@ -1,66 +1,65 @@
 import os
 import shutil
 
-#########Ordner Wählen
-# Directory in dem sich das Skript befindet
-ziel_ordner = os.path.dirname(os.path.abspath(__file__))
-# Directory zum selber eingeben
-#ziel_ordner = r"C:\Users\USERNAME\Downloads"
+#Choose Directoy
+root = os.path.dirname(os.path.abspath(__file__))
+#root = r"C:\Users\USERNAME\Downloads"
 
-def dateien_in_unterordner_schieben():
-    for file in os.listdir(ziel_ordner):
+def copy_files_into_subfolders():
+    for file in os.listdir(root):
         if not file.lower().endswith(".mp4"):
             continue
-        src_path = os.path.join(ziel_ordner, file)
+        src_path = os.path.join(root, file)
 
-        nummer = ""
+        number = ""
         
         for ch in file:
             if ch.isdigit():
-                nummer+=ch
+                number+=ch
             else:
                 break
         
-        folder_name = nummer.zfill(2)
-        target_folder = os.path.join(ziel_ordner, folder_name)
+        folder_name = number.zfill(2)
+        target_folder = os.path.join(root, folder_name)
         dest_path = os.path.join(target_folder, file)
 
         shutil.copy2(src_path, dest_path)
 
 
-def dateien_aus_unterordner_ziehen():
-    for root, dirs, files in os.walk(ziel_ordner):
-        if root == ziel_ordner:
+def pull_files_from_subfolders():
+    for root, dirs, files in os.walk(root):
+        if root == root:
             continue
 
         for file in files:
             if not file.lower().endswith(".mkv"): #only *.mkv   comment out if all files wanted
                 continue #comment out for all files
             file_path = os.path.join(root, file)
-            destination = os.path.join(ziel_ordner, file)
+            destination = os.path.join(root, file)
 
             if os.path.exists(destination):
                 name, ext = os.path.splitext(file)
                 counter = 1
                 while os.path.exists(destination):
-                    destination = os.path.join(ziel_ordner, f"{name}_{counter}{ext}")
+                    destination = os.path.join(root, f"{name}_{counter}{ext}")
                     counter += 1
 
             shutil.copy2(file_path, destination)
             #shutil.move(file_path, destination) #move
 
-    print("done:", ziel_ordner)
+    print("done:", root)
 
-def ordner_anlegen(anzahl):
+def create_folders(anzahl):
     for i in range(1, anzahl+1):
         folder_name = f"{i:02d}"
-        folder_path = os.path.join(ziel_ordner, folder_name)
+        folder_path = os.path.join(root, folder_name)
         os.makedirs(folder_path, exist_ok=True)
 
     print("Done.")
 
-def dateien_umbenennen():
-    for entry in os.scandir(ziel_ordner):
+# name a subtitle file according to the video file. only 2 files per folder allowed (mp3 + vtt)
+def rename_files():
+    for entry in os.scandir(root):
         if not entry.is_dir():
             continue
     
@@ -84,8 +83,8 @@ def dateien_umbenennen():
         
 
 if __name__ == "__main__":
-    #ordner_anlegen(12)
-    #dateien_in_unterordner_schieben()
-    #dateien_umbenennen()
-    #dateien_aus_unterordner_ziehen()
+    #create_folders(12)
+    #copy_files_into_subfolders()
+    #rename_files()
+    #pull_files_from_subfolders()
     print("done")
