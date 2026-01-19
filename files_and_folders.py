@@ -34,7 +34,7 @@ def pull_files_from_subfolders():
         for file in files:
             if not file.lower().endswith(".mkv"): #only *.mkv   comment out if all files wanted
                 continue #comment out for all files
-            file_path = os.path.join(base_dir, file)
+            file_path = os.path.join(root, file)
             destination = os.path.join(base_dir, file)
 
             if os.path.exists(destination):
@@ -49,8 +49,8 @@ def pull_files_from_subfolders():
 
     print("done:", base_dir)
 
-def create_folders(anzahl):
-    for i in range(1, anzahl+1):
+def create_folders(amount):
+    for i in range(1, amount+1):
         folder_name = f"{i:02d}"
         folder_path = os.path.join(base_dir, folder_name)
         os.makedirs(folder_path, exist_ok=True)
