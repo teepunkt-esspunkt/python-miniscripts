@@ -1,5 +1,6 @@
 import os
 import shutil
+import re
 
 #Choose Directoy
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -11,13 +12,12 @@ def copy_files_into_subfolders():
             continue
         src_path = os.path.join(base_dir, file)
 
-        number = ""
-        
-        for ch in file:
-            if ch.isdigit():
-                number+=ch
-            else:
-                break
+        match = re.search(r'\d+', file)
+        if not match:
+            print(f"[WARN] Error {file}")
+            continue
+
+        number = match.group()
         
         folder_name = number.zfill(2)
         target_folder = os.path.join(base_dir, folder_name)
@@ -84,7 +84,7 @@ def rename_files():
 
 if __name__ == "__main__":
     #create_folders(12)
-    #copy_files_into_subfolders()
+    copy_files_into_subfolders()
     #rename_files()
     #pull_files_from_subfolders()
     print("done")
