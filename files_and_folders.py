@@ -6,7 +6,7 @@ import re
 base_dir = os.path.dirname(os.path.abspath(__file__))
 #base_dir = r"C:\Users\USERNAME\Downloads"
 
-def copy_files_into_subfolders():
+def put_files_into_subfolders():
     for file in os.listdir(base_dir):
         if not file.lower().endswith(".mp4"):
             continue
@@ -24,6 +24,7 @@ def copy_files_into_subfolders():
         dest_path = os.path.join(target_folder, file)
 
         shutil.copy2(src_path, dest_path)
+        #shutil.move(src_path, dest_path)
 
 
 def pull_files_from_subfolders():
@@ -84,7 +85,7 @@ def rename_files():
 
 if __name__ == "__main__":
     #create_folders(12)
-    copy_files_into_subfolders()
+    #put_files_into_subfolders()
     #rename_files()
     #pull_files_from_subfolders()
     print("done")
