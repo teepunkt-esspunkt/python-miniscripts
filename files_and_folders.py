@@ -10,7 +10,7 @@ def put_files_into_subfolders():
     for file in os.listdir(base_dir):
         if not file.lower().endswith(".mp4"):
             continue
-        src_path = os.path.join(base_dir, file)
+        source_path = os.path.join(base_dir, file)
 
         match = re.search(r'\d+', file)
         if not match:
@@ -21,10 +21,10 @@ def put_files_into_subfolders():
         
         folder_name = number.zfill(2)
         target_folder = os.path.join(base_dir, folder_name)
-        dest_path = os.path.join(target_folder, file)
+        destination_path = os.path.join(target_folder, file)
 
-        shutil.copy2(src_path, dest_path)
-        #shutil.move(src_path, dest_path)
+        shutil.copy2(source_path, destination_path)
+        #shutil.move(source_path, destination_path)
 
 
 def pull_files_from_subfolders():
@@ -35,18 +35,18 @@ def pull_files_from_subfolders():
         for file in files:
             if not file.lower().endswith(".mkv"): #only *.mkv   comment out if all files wanted
                 continue #comment out for all files
-            file_path = os.path.join(root, file)
-            destination = os.path.join(base_dir, file)
+            source_path = os.path.join(root, file)
+            destination_path = os.path.join(base_dir, file)
 
-            if os.path.exists(destination):
+            if os.path.exists(destination_path):
                 name, ext = os.path.splitext(file)
                 counter = 1
-                while os.path.exists(destination):
-                    destination = os.path.join(base_dir, f"{name}_{counter}{ext}")
+                while os.path.exists(destination_path):
+                    destination_path = os.path.join(base_dir, f"{name}_{counter}{ext}")
                     counter += 1
 
-            shutil.copy2(file_path, destination)
-            #shutil.move(file_path, destination) #move
+            shutil.copy2(source_path, destination_path)
+            #shutil.move(source_path, destination_path) #move
 
     print("done:", base_dir)
 
@@ -87,5 +87,6 @@ if __name__ == "__main__":
     #create_folders(12)
     #put_files_into_subfolders()
     #rename_files()
+    ###MKVtoolnix
     #pull_files_from_subfolders()
     print("done")
