@@ -51,8 +51,8 @@ def put_files_into_subfolders():
         target_folder = os.path.join(base_dir, folder_name)
         destination_path = os.path.join(target_folder, file)
 
-        shutil.copy2(source_path, destination_path)
-        #shutil.move(source_path, destination_path)
+        #shutil.copy2(source_path, destination_path)
+        shutil.move(source_path, destination_path)
 
 
 def pull_files_from_subfolders():
@@ -73,8 +73,8 @@ def pull_files_from_subfolders():
                     destination_path = os.path.join(base_dir, f"{name}_{counter}{ext}")
                     counter += 1
 
-            shutil.copy2(source_path, destination_path)
-            #shutil.move(source_path, destination_path) #move
+            #shutil.copy2(source_path, destination_path)
+            shutil.move(source_path, destination_path) #move
 
     print("done:", base_dir)
 
@@ -112,9 +112,9 @@ def rename_files():
         
 
 if __name__ == "__main__":
-    #fix_episode_numbers()
     #create_folders(12)
     #put_files_into_subfolders()
+    #fix_episode_numbers()
     #rename_files()
     ###MKVtoolnix
     #pull_files_from_subfolders()
