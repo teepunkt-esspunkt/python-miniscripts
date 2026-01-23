@@ -34,9 +34,9 @@ def fix_episode_numbers():
         print(f"[OK] {name} -> {new_name}")
 
 
-def put_files_into_subfolders():
+def put_files_into_subfolders(fileext = ".mp4"):
     for file in os.listdir(base_dir):
-        if not file.lower().endswith(".mp4"):
+        if not file.lower().endswith(fileext):
             continue
         source_path = os.path.join(base_dir, file)
 
@@ -55,13 +55,13 @@ def put_files_into_subfolders():
         shutil.move(source_path, destination_path)
 
 
-def pull_files_from_subfolders():
+def pull_files_from_subfolders(fileext = ".mkv"):
     for root, dirs, files in os.walk(base_dir):
         if root == base_dir:
             continue
 
         for file in files:
-            if not file.lower().endswith(".mkv"): #only *.mkv   comment out if all files wanted
+            if not file.lower().endswith(fileext): #comment out if all files wanted
                 continue #comment out for all files
             source_path = os.path.join(root, file)
             destination_path = os.path.join(base_dir, file)
@@ -112,10 +112,10 @@ def rename_files():
         
 
 if __name__ == "__main__":
+    #rename_files()
     #create_folders(12)
     #put_files_into_subfolders()
     #fix_episode_numbers()
-    #rename_files()
     ###MKVtoolnix
     #pull_files_from_subfolders()
     print("done")
