@@ -1,3 +1,4 @@
+#put all jpgs, that should be merged into one pdf, into one folder with this script and run it.
 import os
 from PIL import Image
 
@@ -33,3 +34,4 @@ else:
         append_images=images[1:]
     )
     print("PDF created:", output_pdf)
+
