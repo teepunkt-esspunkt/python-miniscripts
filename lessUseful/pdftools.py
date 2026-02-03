@@ -41,7 +41,7 @@ def allJPGto1PDF():
 
 
 # # put file in same folder as this file.
-def splitPDF(*page_numbers):
+def extractPDFs(*page_numbers):
     input = 'filename.pdf' # specify filename
     infile = PdfReader(input, 'rb')
     output = PdfWriter()
@@ -55,5 +55,6 @@ def splitPDF(*page_numbers):
 
 if __name__ == "__main__":
     #allJPGto1PDF()
-    #splitPDF(1, 2, 4, 5)
+    #extractPDFs(1, 2, 4, 5)
+
     print("done")
