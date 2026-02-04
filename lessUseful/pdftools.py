@@ -39,6 +39,50 @@ def allJPGto1PDF():
             img.close()
         print("PDF created:", output_pdf)
 
+def jpgs_to_pdfs():
+    for file in sorted(os.listdir(input_folder)):
+        if not file.lower().endswith((".jpg", ".jpeg")):
+            continue
+
+        jpg_path = os.path.join(input_folder, file)
+
+        # keep name, only change extension
+        pdf_name = os.path.splitext(file)[0] + ".pdf"
+        pdf_path = os.path.join(input_folder, pdf_name)
+
+        img = Image.open(jpg_path)
+
+        if img.mode != "RGB":
+            img = img.convert("RGB")
+
+        img.save(pdf_path)
+        img.close()
+
+        print(f"[OK] {file} → {pdf_name}")
+
+def combine_all_pdfs():
+    """Combine ALL PDFs in BASE_DIR into one PDF."""
+    writer = PdfWriter()
+
+    pdf_files = sorted(
+        f for f in os.listdir(input_folder)
+        if f.lower().endswith(".pdf") and f != os.path.basename(output_pdf)
+    )
+
+    if not pdf_files:
+        print("No PDFs found to combine.")
+        return
+
+    for pdf in pdf_files:
+        reader = PdfReader(os.path.join(input_folder, pdf))
+        for page in reader.pages:
+            writer.add_page(page)
+
+    with open(output_pdf, "wb") as f:
+        writer.write(f)
+
+    print(f"[OK] Combined {len(pdf_files)} PDFs → {input_folder}")
+
 
 # # put file in same folder as this file.
 def extractPDFs(*page_numbers):
@@ -54,7 +98,9 @@ def extractPDFs(*page_numbers):
         output.write(f)
 
 if __name__ == "__main__":
-    #allJPGto1PDF()
+    ##allJPGto1PDF()
+    #jpgs_to_pdfs()
+    combine_all_pdfs()
     #extractPDFs(1, 2, 4, 5)
 
     print("done")
