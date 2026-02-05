@@ -114,10 +114,10 @@ def rename_files():
         
 
 if __name__ == "__main__":
-    #rename_files()
     #create_folders(12)
-    #put_files_into_subfolders()
     #fix_episode_numbers()
+    #put_files_into_subfolders()
+    #rename_files()
     ###MKVtoolnix
-    #pull_files_from_subfolders()
+    #pull_files_from_subfolders(".vtt")
     print("all done")
