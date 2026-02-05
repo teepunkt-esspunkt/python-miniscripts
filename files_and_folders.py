@@ -53,6 +53,7 @@ def put_files_into_subfolders(fileext = ".mp4"):
 
         #shutil.copy2(source_path, destination_path)
         shutil.move(source_path, destination_path)
+    print("Move into Subfolders Done")
 
 
 def pull_files_from_subfolders(fileext = ".mkv"):
@@ -84,7 +85,7 @@ def create_folders(amount):
         folder_path = os.path.join(base_dir, folder_name)
         os.makedirs(folder_path, exist_ok=True)
 
-    print("Done.")
+    print("Folder Creation Done.")
 
 # name a subtitle file according to the video file. only 2 files per folder allowed (mp3 + vtt)
 def rename_files():
@@ -107,6 +108,7 @@ def rename_files():
         old = os.path.join(folder, subtitle_name)
         new = os.path.join(folder, new_name)
         os.rename(old, new)
+    print("renaming done")
 
 
         
@@ -118,4 +120,4 @@ if __name__ == "__main__":
     #fix_episode_numbers()
     ###MKVtoolnix
     #pull_files_from_subfolders()
-    print("done")
+    print("all done")
